@@ -21,6 +21,9 @@
     <ClCompile Include="MacierzSasiedztwa.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="ListaSasiedztwa.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Graf.txt">
@@ -29,6 +32,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MacierzSasiedztwa.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaSasiedztwa.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

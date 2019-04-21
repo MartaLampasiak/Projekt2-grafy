@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ListaSasiedztwa.cpp" />
     <ClCompile Include="MacierzSasiedztwa.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -122,6 +123,7 @@
     <Text Include="Graf.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ListaSasiedztwa.hpp" />
     <ClInclude Include="MacierzSasiedztwa.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
