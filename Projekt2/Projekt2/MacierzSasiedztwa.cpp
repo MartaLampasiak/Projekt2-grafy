@@ -14,11 +14,13 @@ void GrafMacierzSasiedztwa::Wyswietl()
 }
 
 void GrafMacierzSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
-{	//czy nie lepiej bool - jezeli krawedz istnieje to nie ma co dodac return false
-	//assert(MacierzSasiedztwa[poczatkowy][koncowy] == 0); //?
+{	
 	assert(koncowy < MaxIloscWierzcholkow);
 	if (MacierzSasiedztwa[poczatkowy][koncowy] == 0)
+	{
 		MacierzSasiedztwa[poczatkowy][koncowy] = waga;
+		MacierzSasiedztwa[koncowy][poczatkowy] = waga;
+	}
 	else
 		return;
 }
@@ -27,7 +29,10 @@ void GrafMacierzSasiedztwa::UsunKrawedz(int poczatkowy, int koncowy)
 {   // jezeli krawedzi nie ma to nie ma czego usuwac
 	assert(koncowy < MaxIloscWierzcholkow);
 	if (MacierzSasiedztwa[poczatkowy][koncowy] > 0)
+	{
 		MacierzSasiedztwa[poczatkowy][koncowy] = 0;
+		MacierzSasiedztwa[koncowy][poczatkowy] = 0;
+	}
 	else
 		return;
 }

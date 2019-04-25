@@ -1,10 +1,23 @@
 #include <iostream>
 #include "ListaSasiedztwa.hpp"
 
-void GrafListaSasiedztwa::DodajPolaczenie(int poczatkowy, int koncowy, int waga)
+void GrafListaSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
 {
-	Lista[poczatkowy].DodajWierzcholek(koncowy, waga);
-	Lista[koncowy].DodajWierzcholek(poczatkowy, waga);
+	if (Lista[poczatkowy].pierwszy == NULL)
+	{
+		Lista[poczatkowy].DodajElement(koncowy, waga);
+		Lista[koncowy].DodajElement(poczatkowy, waga);
+	}
+	else if ((Lista[poczatkowy].CzySasiednie(Lista[poczatkowy].pierwszy, koncowy) == 0) && 
+			 (Lista[koncowy].CzySasiednie(Lista[koncowy].pierwszy, poczatkowy) == 0))
+	{
+		Lista[poczatkowy].DodajElement(koncowy, waga);
+		Lista[koncowy].DodajElement(poczatkowy, waga);
+	}
+	else
+	{
+		return;
+	}
 }
 
 void GrafListaSasiedztwa::Wyswietl()
@@ -16,3 +29,4 @@ void GrafListaSasiedztwa::Wyswietl()
 		std::cout << "\n";
 	}
 }
+

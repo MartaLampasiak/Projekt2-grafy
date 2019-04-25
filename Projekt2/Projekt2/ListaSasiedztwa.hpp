@@ -5,12 +5,12 @@ class GrafListaSasiedztwa
 private:
 	int MaxIloscWierzcholkow;
 
-	struct Wierzcholek
+	struct Element
 	{
 		int wierzcholek;
 		int waga;
-		Wierzcholek *nastepny;
-		Wierzcholek()
+		Element *nastepny;
+		Element()
 		{
 			nastepny = NULL;
 		}
@@ -18,16 +18,16 @@ private:
 
 	struct ListaWierzcholkow
 	{
-		Wierzcholek *pierwszy;
+		Element *pierwszy;
 
 		ListaWierzcholkow()
 		{
 			pierwszy = NULL;
 		}
 
-		void DodajWierzcholek(int wierzcholek, int waga)
+		void DodajElement(int wierzcholek, int waga)
 		{
-			Wierzcholek *nowy = new Wierzcholek; // tworzy nowy element listy
+			Element *nowy = new Element; // tworzy nowy element listy
 
 			// wype³niamy danymi
 			nowy->wierzcholek = wierzcholek;
@@ -42,7 +42,7 @@ private:
 			else
 			{
 				// w przeciwnym wypadku wêdrujemy na koniec listy
-				Wierzcholek *temp = pierwszy;
+				Element *temp = pierwszy;
 
 				while (temp->nastepny)
 				{
@@ -58,13 +58,26 @@ private:
 		void WyswietlListe()
 		{
 			// wskaznik na pierszy element listy
-			Wierzcholek *pom = pierwszy;
+			Element *pom = pierwszy;
 			// przewijamy wskazniki na nastepne elementy
 			while (pom)
 			{
 				std::cout << " " << pom->wierzcholek << ":" << pom->waga;
 				pom = pom->nastepny;
 			}
+		}
+		bool CzySasiednie(Element *pierwszy, int wierzcholek)
+		{
+			Element *pom = pierwszy;
+			while (pom)
+			{
+				if (pom->wierzcholek == wierzcholek)
+				{
+					return 1;
+				}
+				pom = pom->nastepny;
+			}
+			return 0;
 		}
 	};
 
@@ -83,6 +96,7 @@ public:
 		Lista = NULL;
 	}
 
-	void DodajPolaczenie(int poczatkowy, int koncowy, int waga);
+	void DodajKrawedz(int poczatkowy, int koncowy, int waga);
 	void Wyswietl();
+	
 };
