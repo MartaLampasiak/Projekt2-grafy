@@ -55,6 +55,33 @@ private:
 			}
 
 		}
+		void UsunPierwszyElement()
+		{
+			Element *pom = pierwszy;
+
+			if (pom)
+			{
+				pierwszy = pom->nastepny;
+				delete pom;
+			}
+		}
+		void UsunDowolnyElement(int wierzcholek)
+		{
+			Element *pom, *usuwany;
+
+			if (pierwszy->wierzcholek == wierzcholek)
+				UsunPierwszyElement();
+			while (pom->nastepny->wierzcholek != wierzcholek)
+			{
+				pom = pom->nastepny;
+			}
+
+			usuwany = pom->nastepny;
+			pom->nastepny = pom->nastepny->nastepny;
+			delete usuwany;
+
+			//jezeli jest to ostatni element, wyzeruj wskaznik ??
+		}
 		void WyswietlListe()
 		{
 			// wskaznik na pierszy element listy
@@ -66,7 +93,7 @@ private:
 				pom = pom->nastepny;
 			}
 		}
-		bool CzySasiednie(Element *pierwszy, int wierzcholek)
+		bool CzySasiednie(int wierzcholek)
 		{
 			Element *pom = pierwszy;
 			while (pom)
@@ -97,6 +124,7 @@ public:
 	}
 
 	void DodajKrawedz(int poczatkowy, int koncowy, int waga);
+	//void UsunKrawedz(int poczatkowy, int koncowy);
 	void Wyswietl();
 	
 };

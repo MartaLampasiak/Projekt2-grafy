@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GenerowanieGrafu.cpp" />
+    <ClCompile Include="GenerowanieGrafu.hpp" />
     <ClCompile Include="ListaSasiedztwa.cpp" />
     <ClCompile Include="MacierzSasiedztwa.cpp" />
     <ClCompile Include="main.cpp" />
