@@ -20,7 +20,7 @@ int main()
 	//Graf1->Wyswietl();
 	//Graf1->UsunKrawedz(0,9);
 	//Graf1->Wyswietl();
-	GenerujGraf(10, 50);
+	GenerujGraf(10, 100);
 
 	system("pause");
 	return 1;
