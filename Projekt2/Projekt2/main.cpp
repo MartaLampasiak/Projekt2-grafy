@@ -20,7 +20,7 @@ int main()
 	//Graf1->Wyswietl();
 	//Graf1->UsunKrawedz(0,9);
 	//Graf1->Wyswietl();
-	GenerujGraf(100, 100);
+	GenerujGraf2(500, 100);
 	std::fstream graf;
 	char nazwa_pliku[20] = "graf.txt";
 
@@ -39,12 +39,12 @@ int main()
 	{
 		graf >> poczatkowy >> koncowy >> waga;
 		//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
-		Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+		//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
 	}
 	
 	graf.close();
 
-	Graf1->Wyswietl();
+	//Graf1->Wyswietl();
 	system("pause");
 	return 1;
 }

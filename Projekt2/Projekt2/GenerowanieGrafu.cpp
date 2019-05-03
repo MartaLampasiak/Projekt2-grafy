@@ -9,7 +9,7 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 	std::fstream graf;
 	char nazwa_pliku[20] = "graf.txt";
 
-	graf.open(nazwa_pliku, std::ios::app);
+	graf.open(nazwa_pliku, std::ios::out | std::ios::app);
 
 	if (graf.good() == 0)
 	{
@@ -24,27 +24,35 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 		IloscKrawedzi++;
 	}
 	graf.close();
-	graf.open(nazwa_pliku, std::ios::in);
-	//graf.seekg(0, std::ios_base::beg);
+	graf.open(nazwa_pliku, std::ios::in | std::ios::out | std::ios::app);
+	if (graf.good() == false)
+	{
+		return;
+	}
+
 	std::string pierwszy;
 	getline(graf, pierwszy);
-	graf.close();
+
 	for (IloscKrawedzi; IloscKrawedzi < MaxIloscKrawedzi - 1; ++IloscKrawedzi)
 	{
 		int pomWierzcholekPoczatkowy = 0, pomWierzcholekKoncowy = 0, pomWaga = 0;
 		int wierzcholek_poczatkowy = 0, wierzcholek_koncowy = 0;
+
 		do
 		{
 			wierzcholek_poczatkowy = std::rand() % IloscWierzcholkow;
 			wierzcholek_koncowy = std::rand() % IloscWierzcholkow;
 		} while (wierzcholek_poczatkowy == wierzcholek_koncowy);
-		int cokolwiek = 0;
-		graf.open(nazwa_pliku, std::ios::in);
+
+	
+		graf.clear();
+		graf.seekg(0, std::ios_base::beg);
+		getline(graf, pierwszy);
+
 		do
 		{
-
 			graf >> pomWierzcholekPoczatkowy >> pomWierzcholekKoncowy >> pomWaga;
-			//std::cout << pomWierzcholekPoczatkowy << " " << pomWierzcholekKoncowy << " " << pomWaga << "\n";
+
 			while ((((wierzcholek_poczatkowy == pomWierzcholekPoczatkowy) && (wierzcholek_koncowy == pomWierzcholekKoncowy)) ||
 				((wierzcholek_poczatkowy == pomWierzcholekKoncowy) && (wierzcholek_koncowy == pomWierzcholekPoczatkowy))) ||
 				(wierzcholek_poczatkowy == wierzcholek_koncowy))
@@ -52,28 +60,22 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 				wierzcholek_poczatkowy = std::rand() % IloscWierzcholkow;
 				wierzcholek_koncowy = std::rand() % IloscWierzcholkow;
 				//std::cout << "ZAMIANA!" << "\n";
-				graf.seekg(0);
+				graf.clear();
+				graf.seekg(0, std::ios_base::beg);
+				getline(graf, pierwszy);
 			}
-			//cokolwiek++;
-			//std::cout << cokolwiek << "\n";
+
 
 		} while (!graf.eof());
-		//	std::cout << "dodajemy" << "\n";
-		graf.close();
-		//graf.seekp(0, std::ios_base::end);
-		//graf.open(nazwa_pliku, std::ios::out | std::ios::app | std::ios::in);
+			std::cout << IloscKrawedzi << "/"<< MaxIloscKrawedzi << "\n";
 
-		graf.open(nazwa_pliku, std::ios::app);
-		if (graf.good() == 0)
-		{
-			return;
-		}
+		graf.clear();
+		graf.seekp(0, std::ios_base::end);
 		graf << wierzcholek_poczatkowy << " " << wierzcholek_koncowy << " " << (std::rand() % 9) + 1 << "\n";
-		//std::cout << wierzcholek_poczatkowy << " " << wierzcholek_koncowy << " " << (std::rand() % 9) + 1 << "\n";
-		graf.close();
+		
 	}//for
 	std::cout << "koniec dodawania";
-
+	graf.close();
 
 }//void
 
@@ -105,12 +107,9 @@ void GenerujGraf2(int IloscWierzcholkow, int gestoscGrafu)
 
 			if (ile == MaxIloscKrawedzi)
 				break;
-
 		}
 		if (ile == MaxIloscKrawedzi)
 			break;
-
 	}
-
 	graf.close();
 }
