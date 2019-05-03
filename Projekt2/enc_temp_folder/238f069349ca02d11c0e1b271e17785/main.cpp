@@ -39,7 +39,7 @@ int main()
 	{
 		graf >> poczatkowy >> koncowy >> waga;
 		//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
-		//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+		Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
 	}
 	
 	graf.close();
