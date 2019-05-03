@@ -29,7 +29,7 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 	std::string pierwszy;
 	getline(graf, pierwszy);
 	graf.close();
-	for (IloscKrawedzi; IloscKrawedzi < MaxIloscKrawedzi-1; ++IloscKrawedzi)
+	for (IloscKrawedzi; IloscKrawedzi < MaxIloscKrawedzi - 1; ++IloscKrawedzi)
 	{
 		int pomWierzcholekPoczatkowy = 0, pomWierzcholekKoncowy = 0, pomWaga = 0;
 		int wierzcholek_poczatkowy = 0, wierzcholek_koncowy = 0;
@@ -42,11 +42,11 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 		graf.open(nazwa_pliku, std::ios::in);
 		do
 		{
-			
+
 			graf >> pomWierzcholekPoczatkowy >> pomWierzcholekKoncowy >> pomWaga;
 			//std::cout << pomWierzcholekPoczatkowy << " " << pomWierzcholekKoncowy << " " << pomWaga << "\n";
 			while ((((wierzcholek_poczatkowy == pomWierzcholekPoczatkowy) && (wierzcholek_koncowy == pomWierzcholekKoncowy)) ||
-				((wierzcholek_poczatkowy == pomWierzcholekKoncowy) && (wierzcholek_koncowy == pomWierzcholekPoczatkowy))) || 
+				((wierzcholek_poczatkowy == pomWierzcholekKoncowy) && (wierzcholek_koncowy == pomWierzcholekPoczatkowy))) ||
 				(wierzcholek_poczatkowy == wierzcholek_koncowy))
 			{
 				wierzcholek_poczatkowy = std::rand() % IloscWierzcholkow;
@@ -56,9 +56,9 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 			}
 			//cokolwiek++;
 			//std::cout << cokolwiek << "\n";
-			
+
 		} while (!graf.eof());
-	//	std::cout << "dodajemy" << "\n";
+		//	std::cout << "dodajemy" << "\n";
 		graf.close();
 		//graf.seekp(0, std::ios_base::end);
 		//graf.open(nazwa_pliku, std::ios::out | std::ios::app | std::ios::in);
@@ -78,7 +78,7 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 }//void
 
 
-void GenerujGrafPierscien(int IloscWierzcholkow, int gestoscGrafu)
+void GenerujGraf2(int IloscWierzcholkow, int gestoscGrafu)
 {
 	srand(time(NULL));
 	int MaxIloscKrawedzi = (((gestoscGrafu / 100.0)*IloscWierzcholkow*(IloscWierzcholkow - 1))*0.5);
@@ -94,13 +94,23 @@ void GenerujGrafPierscien(int IloscWierzcholkow, int gestoscGrafu)
 		return;
 	}
 	graf << MaxIloscKrawedzi << " " << IloscWierzcholkow << " " << 0 << "\n";
-	//graf << 1 << " " << 0 << " " << (std::rand() % 9) + 1 << "\n";
 
-	for (int j = 0; j < IloscWierzcholkow; ++j )
+	int ile = 0;
+	for (int j = 1; j < IloscWierzcholkow; ++j)
 	{
 		for (int i = 0; i < IloscWierzcholkow; ++i)
 		{
-			std::cout << i %  << " " << (i + j) % n << " " <<
+			graf << i % IloscWierzcholkow << " " << (i + j) % IloscWierzcholkow << " " << (std::rand() % 9) + 1 << "\n";
+			ile++;
+
+			if (ile == MaxIloscKrawedzi)
+				break;
+
 		}
+		if (ile == MaxIloscKrawedzi)
+			break;
+
 	}
+
+	graf.close();
 }

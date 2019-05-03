@@ -6,7 +6,7 @@
 
 int main()
 {
-	int maksymalnaIloscWierzcholkow = 10;
+	int maksymalnaIloscWierzcholkow = 100;
 	GrafMacierzSasiedztwa *Graf1 = new GrafMacierzSasiedztwa(maksymalnaIloscWierzcholkow);
 	GrafListaSasiedztwa *Graf2 = new GrafListaSasiedztwa(maksymalnaIloscWierzcholkow);
 	//Graf2->DodajKrawedz(0, 1, 3);
@@ -20,7 +20,7 @@ int main()
 	//Graf1->Wyswietl();
 	//Graf1->UsunKrawedz(0,9);
 	//Graf1->Wyswietl();
-	GenerujGraf(50, 100);
+	GenerujGraf(100, 100);
 	std::fstream graf;
 	char nazwa_pliku[20] = "graf.txt";
 
@@ -39,12 +39,12 @@ int main()
 	{
 		graf >> poczatkowy >> koncowy >> waga;
 		//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
-		//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+		Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
 	}
 	
 	graf.close();
 
-	//Graf2->Wyswietl();
+	Graf1->Wyswietl();
 	system("pause");
 	return 1;
 }
