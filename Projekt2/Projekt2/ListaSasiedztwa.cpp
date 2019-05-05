@@ -1,4 +1,3 @@
-#include <iostream>
 #include "ListaSasiedztwa.hpp"
 
 void GrafListaSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 class GrafMacierzSasiedztwa
 {
 private:
@@ -33,5 +35,7 @@ public:
 	void Wyswietl();
 	void DodajKrawedz(int poczatkowy, int koncowy, int waga);
 	void UsunKrawedz(int poczatkowy, int koncowy);
+	bool CzySasiednie(int poczatkowy, int koncowy);
+	int ZwrocWageKrawedzi(int poczatkowy, int koncowy);
 	
 };

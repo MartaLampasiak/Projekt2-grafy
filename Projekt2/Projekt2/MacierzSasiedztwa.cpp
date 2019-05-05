@@ -1,4 +1,3 @@
-#include <iostream>
 #include <assert.h>
 #include "MacierzSasiedztwa.hpp"
 
@@ -14,7 +13,7 @@ void GrafMacierzSasiedztwa::Wyswietl()
 }
 
 void GrafMacierzSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
-{	
+{
 	assert(koncowy < MaxIloscWierzcholkow);
 	if (MacierzSasiedztwa[poczatkowy][koncowy] == 0)
 	{
@@ -35,4 +34,16 @@ void GrafMacierzSasiedztwa::UsunKrawedz(int poczatkowy, int koncowy)
 	}
 	else
 		return;
+}
+bool GrafMacierzSasiedztwa::CzySasiednie(int poczatkowy, int koncowy)
+{
+	if ((MacierzSasiedztwa[poczatkowy][koncowy] > 0) || (MacierzSasiedztwa[koncowy][poczatkowy] > 0))
+		return true;
+	else
+		return false;
+}
+
+int GrafMacierzSasiedztwa::ZwrocWageKrawedzi(int poczatkowy, int koncowy)
+{
+	return MacierzSasiedztwa[poczatkowy][koncowy];
 }
