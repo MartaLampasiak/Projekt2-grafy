@@ -40,14 +40,39 @@ int main()
 	{
 		graf >> poczatkowy >> koncowy >> waga;
 		//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
-		Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+		//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
 	}
 	
 	graf.close();
 
-	std::cout << Graf1->ZwrocWageKrawedzi(2,3);
+	//std::cout << Graf1->ZwrocWageKrawedzi(2,3);
 	
 	//Graf1->Wyswietl();
+
+	Kolejka Q(100);   // kolejka 10-cio elementowa
+	int i, p, v;
+
+	srand(time(NULL));
+
+	for (i = 0; i < 100; i++)
+	{
+		v = rand() % 100;
+		p = rand() % 10;
+		std::cout <<  v << ":" << p << std::endl;
+		Q.dodaj(v, p);
+	}
+
+	std::cout << "----\n";
+
+	elementKolejki pom;
+	while (!Q.CzyPusta())
+	{
+		pom = Q.usun();
+		std::cout << pom.wierzcholek << ":" << pom.waga << std::endl;
+		//Q.pop();
+	}
+	std::cout << Q.CzyPusta();
+
 	system("pause");
 	return 1;
 }

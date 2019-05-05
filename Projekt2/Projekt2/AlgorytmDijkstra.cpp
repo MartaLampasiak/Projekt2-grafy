@@ -16,15 +16,6 @@ void AlgorytmDijkstra(GrafMacierzSasiedztwa graf, int startowy, int IloscWierzch
 	odleglosc[startowy] = 0;
 	odwiedzony[startowy] = 1;
 	
-	Kolejka *Q = new Kolejka(IloscWierzcholkow);
-	for ()
-	{
-
-	}
-	while (!(Q->CzyPusta()))
-	{
-
-	}
 
 	for (int i = 1; i <= IloscWierzcholkow; ++i)
 	{
@@ -36,4 +27,20 @@ void AlgorytmDijkstra(GrafMacierzSasiedztwa graf, int startowy, int IloscWierzch
 	}
 }
 
-void AlgorytmDijkstra(GrafListaSasiedztwa graf, int IloscWierzcholkow);
+void AlgorytmDijkstra(GrafListaSasiedztwa graf, int startowy, int IloscWierzcholkow)
+{
+	int *odleglosc = new int[IloscWierzcholkow];
+	bool *odwiedzony = new bool[IloscWierzcholkow];
+
+	for (int i = 0; i <= IloscWierzcholkow; ++i)
+	{
+		odleglosc[i] = oo;
+		odwiedzony[i] = 0;
+	}
+
+	odleglosc[startowy] = 0;
+	odwiedzony[startowy] = 1;
+
+	Kolejka *Q = new Kolejka(IloscWierzcholkow);
+	//Q->dodaj();
+}

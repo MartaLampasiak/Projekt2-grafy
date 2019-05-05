@@ -26,19 +26,19 @@ bool Kolejka::CzyPusta()
 //-----------------------------
 int Kolejka::front()
 {
-	return T[0].vertex;
+	return T[0].wierzcholek;
 }
 
 // Zwraca priorytet pierwszego elementu
 //-------------------------------------
 int Kolejka::frontWeight()
 {
-	return T[0].weight;
+	return T[0].waga;
 }
 
 // Zapisuje do kolejki wg priorytetu
 //----------------------------------
-void Kolejka::push(int vertex, int weight)
+void Kolejka::dodaj(int wierzcholek, int waga)
 {
 	int i, j;
 
@@ -46,45 +46,45 @@ void Kolejka::push(int vertex, int weight)
 	size++;
 	j = (i - 1) / 2;
 
-	while (i > 0 && T[j].weight > weight)
+	while (i > 0 && T[j].waga > waga)
 	{
 		T[i] = T[j];
 		i = j;
 		j = (i - 1) / 2;
 	}
 
-	T[i].weight = weight;
-	T[i].vertex = vertex;
+	T[i].waga = waga;
+	T[i].wierzcholek = wierzcholek;
 }
 
 // Usuwa z kolejki
 //----------------
-elementKolejki Kolejka::pop()
+elementKolejki Kolejka::usun()
 {
 	elementKolejki pom;
-	pom.vertex = T[0].vertex;
-	pom.weight = T[0].weight;
-	int i, j, vertex, weight;
+	pom.wierzcholek = T[0].wierzcholek;
+	pom.waga = T[0].waga;
+	int i, j, wierzcholek, waga;
 
 	if (size--)
 	{
-		weight = T[size].weight;
-		vertex = T[size].vertex;
+		waga = T[size].waga;
+		wierzcholek = T[size].wierzcholek;
 
 		i = 0;
 		j = 1;
 
 		while (j < size)
 		{
-			if (j + 1 < size && T[j + 1].weight < T[j].weight) j++;
-			if (weight <= T[j].weight) break;
+			if (j + 1 < size && T[j + 1].waga < T[j].waga) j++;
+			if (waga <= T[j].waga) break;
 			T[i] = T[j];
 			i = j;
 			j = 2 * j + 1;
 		}
 
-		T[i].weight = weight;
-		T[i].vertex = vertex;
+		T[i].waga = waga;
+		T[i].wierzcholek = wierzcholek;
 	}
 	return pom;
 }

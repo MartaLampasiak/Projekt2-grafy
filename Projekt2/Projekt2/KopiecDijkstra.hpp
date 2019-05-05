@@ -3,7 +3,8 @@
 
 struct elementKolejki
 {
-	int weight, vertex;
+	int wierzcholek;
+	int waga;
 };
 
 class Kolejka
@@ -18,6 +19,6 @@ public:
 	bool CzyPusta();
 	int  front();
 	int  frontWeight();
-	void push(int vertex, int weigh);
-	elementKolejki pop();
+	void dodaj(int wierzcholek, int waga);
+	elementKolejki usun();
 };
