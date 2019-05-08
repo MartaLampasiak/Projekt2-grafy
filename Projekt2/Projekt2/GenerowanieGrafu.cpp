@@ -37,3 +37,11 @@ void GenerujGraf2(int IloscWierzcholkow, int gestoscGrafu)
 	graf.close();
 }
 
+
+
+
+
+
+
+
+
