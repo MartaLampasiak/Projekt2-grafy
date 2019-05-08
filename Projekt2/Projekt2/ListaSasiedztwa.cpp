@@ -7,16 +7,15 @@ void GrafListaSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
 		Lista[poczatkowy].DodajElement(koncowy, waga);
 		Lista[koncowy].DodajElement(poczatkowy, waga);
 	}
-	else if ((Lista[poczatkowy].CzySasiednie(koncowy) == 0) && 
-			 (Lista[koncowy].CzySasiednie(poczatkowy) == 0))
+	else if ((Lista[poczatkowy].CzySasiednie(koncowy) == 0) &&
+			(Lista[koncowy].CzySasiednie(poczatkowy) == 0))
 	{
 		Lista[poczatkowy].DodajElement(koncowy, waga);
 		Lista[koncowy].DodajElement(poczatkowy, waga);
 	}
 	else
-	{
 		return;
-	}
+
 }
 
 void GrafListaSasiedztwa::Wyswietl()
@@ -29,7 +28,7 @@ void GrafListaSasiedztwa::Wyswietl()
 	}
 }
 
-//void UsunKrawedz(int poczatkowy, int koncowy)
-//{
-//
-//}
+void GrafListaSasiedztwa::ZwrocPrzylegleWierzcholki(elementKopca przylegle[], int wierzcholek, int IloscWierzcholkow)
+{
+	Lista[wierzcholek].przylegleWierzcholki(przylegle, IloscWierzcholkow);
+}

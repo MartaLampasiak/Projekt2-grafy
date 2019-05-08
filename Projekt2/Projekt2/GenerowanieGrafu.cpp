@@ -61,7 +61,6 @@ void GenerujGraf(int IloscWierzcholkow, int gestoscGrafu)
 			{
 				wierzcholek_poczatkowy = std::rand() % IloscWierzcholkow;
 				wierzcholek_koncowy = std::rand() % IloscWierzcholkow;
-				//std::cout << "ZAMIANA!" << "\n";
 				graf.clear();
 				graf.seekg(0, std::ios_base::beg);
 				getline(graf, pierwszy);

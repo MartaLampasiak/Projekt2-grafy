@@ -1,15 +1,18 @@
 #pragma once
+
 #include <iostream>
+#include "KopiecDijkstra.hpp"
 
 class GrafListaSasiedztwa
 {
 private:
+
 	int MaxIloscWierzcholkow;
 
 	struct Element
 	{
-		int wierzcholek;
-		int waga;
+		int wierzcholek = 0;
+		int waga = 0;
 		Element *nastepny;
 		Element()
 		{
@@ -43,15 +46,15 @@ private:
 			else
 			{
 				// w przeciwnym wypadku wêdrujemy na koniec listy
-				Element *temp = pierwszy;
+				Element *pom = pierwszy;
 
-				while (temp->nastepny)
+				while (pom->nastepny)
 				{
 					// znajdujemy wskaŸnik na ostatni element
-					temp = temp->nastepny;
+					pom = pom->nastepny;
 				}
 
-				temp->nastepny = nowy;  // ostatni element wskazuje na nasz nowy
+				pom->nastepny = nowy;  // ostatni element wskazuje na nasz nowy
 				nowy->nastepny = 0;     // ostatni nie wskazuje na nic
 			}
 
@@ -107,11 +110,27 @@ private:
 			}
 			return 0;
 		}
+		void przylegleWierzcholki(elementKopca przylegle[], int IloscWierzcholkow)
+		{
+			Element *pom = pierwszy;
+			int i = 0;
+			while (pom)
+			{
+				przylegle[i].wierzcholek = pom->wierzcholek;
+				przylegle[i].waga = pom->waga;
+				pom = pom->nastepny;
+				i++;
+				if (i == IloscWierzcholkow - 1)
+					break;
+			}
+		}
 	};
 
 	ListaWierzcholkow *Lista;
 
 public:
+	int IloscKrawedzi = 0;
+
 	GrafListaSasiedztwa(int MaxIloscWierzcholkow)
 	{
 		this->MaxIloscWierzcholkow = MaxIloscWierzcholkow;
@@ -125,7 +144,7 @@ public:
 	}
 
 	void DodajKrawedz(int poczatkowy, int koncowy, int waga);
-	//void UsunKrawedz(int poczatkowy, int koncowy);
 	void Wyswietl();
-	
+	void ZwrocPrzylegleWierzcholki(elementKopca przylegle[], int wierzcholek, int IloscWierzcholkow);
+
 };

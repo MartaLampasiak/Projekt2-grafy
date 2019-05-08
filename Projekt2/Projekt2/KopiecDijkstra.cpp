@@ -2,48 +2,34 @@
 
 // Konstruktor - rezerwuje pamiêæ na kopiec
 //-----------------------------------------
-Kolejka::Kolejka(int MaxIloscWierzcholkow)
+Kopiec::Kopiec(int MaxIloscWierzcholkow)
 {
-	T = new elementKolejki[MaxIloscWierzcholkow];  // tworzymy tablicê dynamiczn¹
-	size = 0;                 // kopiec jest pusty
+	T = new elementKopca[MaxIloscWierzcholkow];  // tworzymy tablicê dynamiczn¹
+	IloscWierzcholkow = 0;                 // kopiec jest pusty
 }
 
 // Destruktor - usuwa tablicê z pamiêci
 //-------------------------------------
-Kolejka::~Kolejka()
+Kopiec::~Kopiec()
 {
 	delete[] T;
 }
 
 // Sprawdza, czy kolejka jest pusta
 //---------------------------------
-bool Kolejka::CzyPusta()
+bool Kopiec::CzyPusta()
 {
-	return !size;
-}
-
-// Zwraca pocz¹tek kolejki.
-//-----------------------------
-int Kolejka::front()
-{
-	return T[0].wierzcholek;
-}
-
-// Zwraca priorytet pierwszego elementu
-//-------------------------------------
-int Kolejka::frontWeight()
-{
-	return T[0].waga;
+	return !IloscWierzcholkow;
 }
 
 // Zapisuje do kolejki wg priorytetu
 //----------------------------------
-void Kolejka::dodaj(int wierzcholek, int waga)
+void Kopiec::dodaj(int wierzcholek, int waga)
 {
 	int i, j;
 
-	i = size;
-	size++;
+	i = IloscWierzcholkow;
+	IloscWierzcholkow++;
 	j = (i - 1) / 2;
 
 	while (i > 0 && T[j].waga > waga)
@@ -59,25 +45,27 @@ void Kolejka::dodaj(int wierzcholek, int waga)
 
 // Usuwa z kolejki
 //----------------
-elementKolejki Kolejka::usun()
+elementKopca Kopiec::usun()
 {
-	elementKolejki pom;
+	elementKopca pom;
 	pom.wierzcholek = T[0].wierzcholek;
 	pom.waga = T[0].waga;
 	int i, j, wierzcholek, waga;
 
-	if (size--)
+	if (IloscWierzcholkow--)
 	{
-		waga = T[size].waga;
-		wierzcholek = T[size].wierzcholek;
-
+		waga = T[IloscWierzcholkow].waga;
+		wierzcholek = T[IloscWierzcholkow].wierzcholek;
 		i = 0;
 		j = 1;
 
-		while (j < size)
+		while (j < IloscWierzcholkow)
 		{
-			if (j + 1 < size && T[j + 1].waga < T[j].waga) j++;
-			if (waga <= T[j].waga) break;
+			if (j + 1 < IloscWierzcholkow && T[j + 1].waga < T[j].waga)
+				j++;
+			if (waga <= T[j].waga)
+				break;
+
 			T[i] = T[j];
 			i = j;
 			j = 2 * j + 1;
@@ -87,4 +75,41 @@ elementKolejki Kolejka::usun()
 		T[i].wierzcholek = wierzcholek;
 	}
 	return pom;
+}
+
+void Kopiec::zamienWagi(int wierzcholek, int innaWaga)
+{
+	int i = 0;
+	while (T[i].wierzcholek != wierzcholek)
+	{
+		i++;
+		if (i == IloscWierzcholkow)
+			return;
+	}
+	T[i].waga = innaWaga;
+}
+
+
+void Kopiec::przywrocMinKopiec()
+{
+	for (int IdRodzica = 0; IdRodzica < IloscWierzcholkow; ++IdRodzica)
+	{
+		// zapis elementow drzewa za pomoca indeksow tablicy
+		int najmniejszy = IdRodzica;
+		int leweDziecko = 2 * IdRodzica + 1;
+		int praweDziecko = 2 * IdRodzica + 2;
+
+		if ((leweDziecko < IloscWierzcholkow) && (T[leweDziecko].waga < T[najmniejszy].waga))
+			najmniejszy = leweDziecko;
+
+		if ((praweDziecko < IloscWierzcholkow) && (T[praweDziecko].waga < T[najmniejszy].waga))
+			najmniejszy = praweDziecko;
+
+		if (najmniejszy != IdRodzica)
+		{
+			elementKopca pom = T[IdRodzica];
+			T[IdRodzica] = T[najmniejszy];
+			T[najmniejszy] = pom;
+		}
+	}
 }

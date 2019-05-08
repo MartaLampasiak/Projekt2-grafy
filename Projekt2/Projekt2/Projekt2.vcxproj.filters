@@ -36,9 +36,24 @@
     <ClCompile Include="KopiecDijkstra.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Kolejka.cpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Graf.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="CzasyLista.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="CzasyMacierz.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="dijkstraMacierz.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="dijkstraLista.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
   </ItemGroup>
@@ -54,6 +69,9 @@
     </ClInclude>
     <ClInclude Include="KopiecDijkstra.hpp">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Kolejka.hpp">
+      <Filter>Pliki źródłowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

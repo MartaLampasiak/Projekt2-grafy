@@ -118,16 +118,22 @@
     <ClCompile Include="AlgorytmDijkstra.cpp" />
     <ClCompile Include="GenerowanieGrafu.cpp" />
     <ClCompile Include="GenerowanieGrafu.hpp" />
+    <ClCompile Include="Kolejka.cpp" />
     <ClCompile Include="KopiecDijkstra.cpp" />
     <ClCompile Include="ListaSasiedztwa.cpp" />
     <ClCompile Include="MacierzSasiedztwa.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CzasyLista.txt" />
+    <Text Include="CzasyMacierz.txt" />
+    <Text Include="dijkstraLista.txt" />
+    <Text Include="dijkstraMacierz.txt" />
     <Text Include="Graf.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgorytmDijkstra.hpp" />
+    <ClInclude Include="Kolejka.hpp" />
     <ClInclude Include="KopiecDijkstra.hpp" />
     <ClInclude Include="ListaSasiedztwa.hpp" />
     <ClInclude Include="MacierzSasiedztwa.hpp" />

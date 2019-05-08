@@ -1,77 +1,125 @@
 #include <iostream>
+#include <chrono>
 #include "GenerowanieGrafu.hpp"
 #include "MacierzSasiedztwa.hpp"
 #include "ListaSasiedztwa.hpp"
 #include "AlgorytmDijkstra.hpp"
 
 
+
 int main()
 {
-	int maksymalnaIloscWierzcholkow = 10;
-	GrafMacierzSasiedztwa *Graf1 = new GrafMacierzSasiedztwa(maksymalnaIloscWierzcholkow);
-	GrafListaSasiedztwa *Graf2 = new GrafListaSasiedztwa(maksymalnaIloscWierzcholkow);
-	//Graf2->DodajKrawedz(0, 1, 3);
-	//Graf2->DodajKrawedz(0, 1, 3);
-	//Graf2->DodajKrawedz(2, 0, 3);
-	//Graf2->DodajKrawedz(0, 2, 3);
-	//Graf2->DodajKrawedz(0, 1, 3);
-	//Graf2->Wyswietl();
-	//Graf1->DodajKrawedz(0, 9, 1);
-	//Graf1->DodajKrawedz(0, 8, 2);
-	//Graf1->Wyswietl();
-	//Graf1->UsunKrawedz(0,9);
-	//Graf1->Wyswietl();
-	GenerujGraf2(maksymalnaIloscWierzcholkow, 100);
-	std::fstream graf;
-	char nazwa_pliku[20] = "graf.txt";
-	
-	graf.open(nazwa_pliku, std::ios::in);
+	std::chrono::duration<double> czasMacierz;
+	std::chrono::duration<double> czasLista;
 
-	if (graf.good() == 0)
-	{
-		return 0;
-	}
-
+	int IloscWierzcholkow = 0, IloscKrawedzi = 0, startowy = 0;
 	int poczatkowy = 0, koncowy = 0, waga = 0;
-	std::string pierwszy;
-	getline(graf, pierwszy);
 
-	while (!graf.eof())
+	int liczbaInstancji = 100;
+	int IlosciWierzcholkow[5] = { 10, 50, 100, 500, 1000 };
+	int Gestosc[4] = { 25, 50, 75, 100 };
+
+	std::fstream graf;
+	std::fstream CzasyMacierz;
+	std::fstream CzasyLista;
+
+	char nazwa_pliku[20] = "graf.txt";
+
+
+	for (int wierzcholki = 0; wierzcholki < 5; ++wierzcholki)
 	{
-		graf >> poczatkowy >> koncowy >> waga;
-		//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
-		//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+		std::cout << "Graf " << IlosciWierzcholkow[wierzcholki] << "\n";
+		for (int gestosc = 0; gestosc < 4; ++gestosc)
+		{
+			double sumaCzasMacierz = 0, sumaCzasLista = 0;;
+
+			std::cout << gestosc + 1 << ". Aktualna gestosc " << Gestosc[gestosc] << "\n";
+
+			for (int i = 0; i < liczbaInstancji; ++i)
+			{
+
+
+				GenerujGraf2(IlosciWierzcholkow[wierzcholki], Gestosc[gestosc]);
+
+				graf.open(nazwa_pliku, std::ios::in);
+
+				if (graf.good() == 0)
+					return 0;
+
+				graf >> IloscKrawedzi >> IloscWierzcholkow;
+				GrafMacierzSasiedztwa *GrafM = new GrafMacierzSasiedztwa(IloscWierzcholkow);
+				GrafListaSasiedztwa *GrafL = new GrafListaSasiedztwa(IloscWierzcholkow);
+				graf >> startowy;
+
+				while (!graf.eof())
+				{
+					graf >> poczatkowy >> koncowy >> waga;
+					GrafM->DodajKrawedz(poczatkowy, koncowy, waga);
+					GrafL->DodajKrawedz(poczatkowy, koncowy, waga);
+				}
+
+				auto start = std::chrono::system_clock::now();
+				AlgorytmDijkstra(GrafM, startowy, IloscWierzcholkow);
+				auto end = std::chrono::system_clock::now();
+
+				czasMacierz = end - start;
+				sumaCzasMacierz += czasMacierz.count();
+
+
+				start = std::chrono::system_clock::now();
+				AlgorytmDijkstra(GrafL, startowy, IloscWierzcholkow);
+				end = std::chrono::system_clock::now();
+
+				czasLista = end - start;
+				sumaCzasLista += czasLista.count();
+
+				graf.close();
+
+			}
+
+			CzasyMacierz.open("CzasyMacierz.txt", std::ios::out | std::ios::app);
+
+			if (CzasyMacierz.good() == 0)
+				return 0;
+
+			CzasyMacierz << IlosciWierzcholkow[wierzcholki] << " " << Gestosc[gestosc] << " " << (sumaCzasMacierz / 100.0) << std::endl;
+			CzasyMacierz.close();
+
+			CzasyLista.open("CzasyLista.txt", std::ios::out | std::ios::app);
+
+			if (CzasyLista.good() == 0)
+				return 0;
+
+			CzasyLista << IlosciWierzcholkow[wierzcholki] << " " << Gestosc[gestosc] << " " << (sumaCzasLista / 100.0) << std::endl;
+			CzasyLista.close();
+		}
 	}
-	
-	graf.close();
+	//GenerujGraf2(10, 100);
+	//graf >> IloscKrawedzi >> IloscWierzcholkow;
+	//GrafMacierzSasiedztwa *Graf1 = new GrafMacierzSasiedztwa(IloscWierzcholkow);
+	//GrafListaSasiedztwa *Graf2 = new GrafListaSasiedztwa(IloscWierzcholkow);
+	//graf >> startowy;
+	////int poczatkowy = 0, koncowy = 0, waga = 0;
+	////std::string pierwszy;
+	////getline(graf, pierwszy);
 
-	//std::cout << Graf1->ZwrocWageKrawedzi(2,3);
-	
-	//Graf1->Wyswietl();
+	//while (!graf.eof())
+	//{
+	//	graf >> poczatkowy >> koncowy >> waga;
+	//	Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+	//	Graf2->DodajKrawedz(poczatkowy, koncowy, waga);
+	//	//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
+	//	//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
+	//}
 
-	Kolejka Q(100);   // kolejka 10-cio elementowa
-	int i, p, v;
 
-	srand(time(NULL));
 
-	for (i = 0; i < 100; i++)
-	{
-		v = rand() % 100;
-		p = rand() % 10;
-		std::cout <<  v << ":" << p << std::endl;
-		Q.dodaj(v, p);
-	}
+	////std::cout << Graf1->ZwrocWageKrawedzi(2,3);
 
-	std::cout << "----\n";
+	////Graf1->Wyswietl();
+	//AlgorytmDijkstra(Graf1, startowy, IloscWierzcholkow);
+	//AlgorytmDijkstra(Graf2, startowy, IloscWierzcholkow);
 
-	elementKolejki pom;
-	while (!Q.CzyPusta())
-	{
-		pom = Q.usun();
-		std::cout << pom.wierzcholek << ":" << pom.waga << std::endl;
-		//Q.pop();
-	}
-	std::cout << Q.CzyPusta();
 
 	system("pause");
 	return 1;

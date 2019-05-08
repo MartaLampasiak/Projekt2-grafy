@@ -1,24 +1,24 @@
 #pragma once
 
 
-struct elementKolejki
+struct elementKopca
 {
 	int wierzcholek;
 	int waga;
 };
 
-class Kolejka
+class Kopiec
 {
 private:
-	elementKolejki * T;  // kopiec dynamiczny
-	int size;         // liczba elementów
+	elementKopca * T;  // kopiec dynamiczny
+	int IloscWierzcholkow;         // liczba elementów
 
 public:
-	Kolejka(int MaxIloscWierzcholkow);
-	~Kolejka();
+	Kopiec(int MaxIloscWierzcholkow);
+	~Kopiec();
 	bool CzyPusta();
-	int  front();
-	int  frontWeight();
 	void dodaj(int wierzcholek, int waga);
-	elementKolejki usun();
+	elementKopca usun();
+	void zamienWagi(int wierzcholek, int innaWaga);
+	void przywrocMinKopiec();
 };
