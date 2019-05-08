@@ -52,21 +52,6 @@ void AlgorytmDijkstra(GrafMacierzSasiedztwa *graf, int startowy, int IloscWierzc
 			break;
 	}
 
-	//for (int i = 0; i < IloscWierzcholkow; ++i)
-	//{
-	//	std::cout << i << " " << odleglosc[i] << " ";
-	//	while (!(poprzedni[i].CzyPusta()))
-	//	{
-	//		int pom = poprzedni[i].usun();
-	//		std::cout << pom;
-	//		if (!(poprzedni[i].CzyPusta()))
-	//		{
-	//			std::cout << "->";
-	//		}
-	//	}
-	//	std::cout << std::endl;
-	//}
-	//std::cout << std::endl;
 	std::fstream dijkstraMacierz;
 	dijkstraMacierz.open("dijkstraMacierz.txt", std::ios::out | std::ios::app);
 

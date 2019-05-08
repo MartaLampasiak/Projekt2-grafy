@@ -38,7 +38,7 @@ int main()
 			for (int i = 0; i < liczbaInstancji; ++i)
 			{
 
-
+				std::cout << i << "/" << liczbaInstancji << std::endl;
 				GenerujGraf2(IlosciWierzcholkow[wierzcholki], Gestosc[gestosc]);
 
 				graf.open(nazwa_pliku, std::ios::in);
@@ -94,32 +94,6 @@ int main()
 			CzasyLista.close();
 		}
 	}
-	//GenerujGraf2(10, 100);
-	//graf >> IloscKrawedzi >> IloscWierzcholkow;
-	//GrafMacierzSasiedztwa *Graf1 = new GrafMacierzSasiedztwa(IloscWierzcholkow);
-	//GrafListaSasiedztwa *Graf2 = new GrafListaSasiedztwa(IloscWierzcholkow);
-	//graf >> startowy;
-	////int poczatkowy = 0, koncowy = 0, waga = 0;
-	////std::string pierwszy;
-	////getline(graf, pierwszy);
-
-	//while (!graf.eof())
-	//{
-	//	graf >> poczatkowy >> koncowy >> waga;
-	//	Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
-	//	Graf2->DodajKrawedz(poczatkowy, koncowy, waga);
-	//	//std::cout << poczatkowy << " " << koncowy << " " << waga << "\n";
-	//	//Graf1->DodajKrawedz(poczatkowy, koncowy, waga);
-	//}
-
-
-
-	////std::cout << Graf1->ZwrocWageKrawedzi(2,3);
-
-	////Graf1->Wyswietl();
-	//AlgorytmDijkstra(Graf1, startowy, IloscWierzcholkow);
-	//AlgorytmDijkstra(Graf2, startowy, IloscWierzcholkow);
-
 
 	system("pause");
 	return 1;

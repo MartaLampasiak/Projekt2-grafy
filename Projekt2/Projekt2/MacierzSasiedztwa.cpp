@@ -11,8 +11,7 @@ void GrafMacierzSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
 		MacierzSasiedztwa[koncowy][poczatkowy] = waga;
 		IloscKrawedzi++;
 	}
-	//else
-	//	return;
+
 }
 
 void GrafMacierzSasiedztwa::UsunKrawedz(int poczatkowy, int koncowy)
@@ -23,8 +22,7 @@ void GrafMacierzSasiedztwa::UsunKrawedz(int poczatkowy, int koncowy)
 		MacierzSasiedztwa[koncowy][poczatkowy] = 0;
 		IloscKrawedzi--;
 	}
-	//else
-	//	return;
+
 }
 
 void GrafMacierzSasiedztwa::Wyswietl()
