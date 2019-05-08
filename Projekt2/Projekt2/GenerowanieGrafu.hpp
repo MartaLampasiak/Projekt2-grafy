@@ -4,5 +4,5 @@
 #include <ctime>
 #include <string>
 
-void GenerujGraf(int iloscWierzcholkow, int gestoscGrafu);
+/* Metoda generujaca graf spojny */
 void GenerujGraf2(int IloscWierzcholkow, int gestoscGrafu);

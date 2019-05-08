@@ -1,7 +1,5 @@
 #include "MacierzSasiedztwa.hpp"
 
-
-
 void GrafMacierzSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
 {
 
@@ -14,6 +12,7 @@ void GrafMacierzSasiedztwa::DodajKrawedz(int poczatkowy, int koncowy, int waga)
 
 }
 
+
 void GrafMacierzSasiedztwa::UsunKrawedz(int poczatkowy, int koncowy)
 {
 	if ((MacierzSasiedztwa[poczatkowy][koncowy] > 0) && (MacierzSasiedztwa[koncowy][poczatkowy] > 0))
@@ -24,6 +23,7 @@ void GrafMacierzSasiedztwa::UsunKrawedz(int poczatkowy, int koncowy)
 	}
 
 }
+
 
 void GrafMacierzSasiedztwa::Wyswietl()
 {
@@ -36,6 +36,7 @@ void GrafMacierzSasiedztwa::Wyswietl()
 	std::cout << "\n";
 }
 
+
 bool GrafMacierzSasiedztwa::CzySasiednie(int poczatkowy, int koncowy)
 {
 	if ((MacierzSasiedztwa[poczatkowy][koncowy] > 0) || (MacierzSasiedztwa[koncowy][poczatkowy] > 0))
@@ -43,6 +44,7 @@ bool GrafMacierzSasiedztwa::CzySasiednie(int poczatkowy, int koncowy)
 	else
 		return false;
 }
+
 
 int GrafMacierzSasiedztwa::ZwrocWageKrawedzi(int poczatkowy, int koncowy)
 {

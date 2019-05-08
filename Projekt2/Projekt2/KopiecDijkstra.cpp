@@ -1,29 +1,25 @@
 #include "KopiecDijkstra.hpp"
 
-// Konstruktor - rezerwuje pamiêæ na kopiec
-//-----------------------------------------
+
 Kopiec::Kopiec(int MaxIloscWierzcholkow)
 {
 	T = new elementKopca[MaxIloscWierzcholkow];  // tworzymy tablicê dynamiczn¹
 	IloscWierzcholkow = 0;                 // kopiec jest pusty
 }
 
-// Destruktor - usuwa tablicê z pamiêci
-//-------------------------------------
+
 Kopiec::~Kopiec()
 {
 	delete[] T;
 }
 
-// Sprawdza, czy kolejka jest pusta
-//---------------------------------
+
 bool Kopiec::CzyPusta()
 {
 	return !IloscWierzcholkow;
 }
 
-// Zapisuje do kolejki wg priorytetu
-//----------------------------------
+
 void Kopiec::dodaj(int wierzcholek, int waga)
 {
 	int i, j;
@@ -43,8 +39,7 @@ void Kopiec::dodaj(int wierzcholek, int waga)
 	T[i].wierzcholek = wierzcholek;
 }
 
-// Usuwa z kolejki
-//----------------
+
 elementKopca Kopiec::usun()
 {
 	elementKopca pom;

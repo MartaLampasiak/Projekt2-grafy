@@ -12,8 +12,8 @@ void AlgorytmDijkstra(GrafMacierzSasiedztwa *graf, int startowy, int IloscWierzc
 
 	for (int i = 0; i <= IloscWierzcholkow; ++i)
 	{
-		odwiedzone[i] = 0;
-		odleglosc[i] = oo;
+		odwiedzone[i] = 0; // na poczatku wierzcholki sa nieodwiedzone
+		odleglosc[i] = oo; // wstepna odleglosc to nieskonczonosc
 	}
 
 
@@ -41,7 +41,7 @@ void AlgorytmDijkstra(GrafMacierzSasiedztwa *graf, int startowy, int IloscWierzc
 		{
 			if ((odwiedzone[i] == 0) && (odleglosc[i] >= 0) && ((najkrotszaDroga > odleglosc[i])))
 			{
-				najkrotszaDroga = odleglosc[i];
+				najkrotszaDroga = odleglosc[i]; // wpisanie najkrotszej drogi do tablicy odleglosci
 				najmniejszyWierzcholek = i;
 			}
 		}
@@ -52,6 +52,7 @@ void AlgorytmDijkstra(GrafMacierzSasiedztwa *graf, int startowy, int IloscWierzc
 			break;
 	}
 
+	// wpisanie sciezki dla kazdego wierzcholka do pliku wynikowego
 	std::fstream dijkstraMacierz;
 	dijkstraMacierz.open("dijkstraMacierz.txt", std::ios::out | std::ios::app);
 
@@ -89,18 +90,18 @@ void AlgorytmDijkstra(GrafListaSasiedztwa *graf, int startowy, int IloscWierzcho
 	{
 		if (startowy != i)
 		{
-			odleglosc[i] = oo;
+			odleglosc[i] = oo; // wstepna odleglosc to nieskonczonosc
 		}
-		odleglosc[startowy] = 0;
+		odleglosc[startowy] = 0; 
 		odwiedzony[i] = 0;
-		Q->dodaj(i, odleglosc[i]);
+		Q->dodaj(i, odleglosc[i]); // dodanie wierzcholkow na kopiec
 	}
 
 	while (!(Q->CzyPusta()))
 	{
 		for (int i = 0; i < IloscWierzcholkow - 1; ++i)
 		{
-			przylegleW[i].wierzcholek = -1;
+			przylegleW[i].wierzcholek = -1; // brak sasiada
 			przylegleW[i].waga = 0;
 		}
 		elementKopca u = Q->usun();
@@ -110,7 +111,7 @@ void AlgorytmDijkstra(GrafListaSasiedztwa *graf, int startowy, int IloscWierzcho
 		for (int i = 0; i < IloscWierzcholkow - 1; i++)
 		{
 			if ((odwiedzony[przylegleW[i].wierzcholek] == 0) && (przylegleW[i].wierzcholek != -1))
-			{
+			{	// relaksacja krawedzi
 				if ((odleglosc[u.wierzcholek] + przylegleW[i].waga) < odleglosc[przylegleW[i].wierzcholek])
 				{
 					odleglosc[przylegleW[i].wierzcholek] = odleglosc[u.wierzcholek] + przylegleW[i].waga;
@@ -122,6 +123,7 @@ void AlgorytmDijkstra(GrafListaSasiedztwa *graf, int startowy, int IloscWierzcho
 		}
 	}
 
+	// wpisanie sciezki dla kazdego wierzcholka do pliku wynikowego
 	std::fstream dijkstraLista;
 	dijkstraLista.open("dijkstraLista.txt", std::ios::out | std::ios::app);
 

@@ -3,12 +3,21 @@
 #include <iostream>
 #include "KopiecDijkstra.hpp"
 
+/* Klasa umozliwiajaca tworzenie obiektow
+   typu GrafListaSasiedztwa
+   (Reprezentuje graf oparty na liscie sasiedztwa)
+   Metody:
+		  DodajKrawedz
+		  Wyswietl
+		  ZwrocPrzylegleWierzcholki
+														*/
 class GrafListaSasiedztwa
 {
 private:
 
 	int MaxIloscWierzcholkow;
 
+	/*	Struktura elementu przechowywanego przez liste	*/
 	struct Element
 	{
 		int wierzcholek = 0;
@@ -20,6 +29,8 @@ private:
 		}
 	};
 
+	/* Struktura listy potrzebnej do zaimplementowania listy sasiedztwa			  */
+	/* listy beda przechowywac wierzcholki przylegle z wagami dla danych wierzcholkow*/
 	struct ListaWierzcholkow
 	{
 		Element *pierwszy;
@@ -31,21 +42,19 @@ private:
 
 		void DodajElement(int wierzcholek, int waga)
 		{
-			Element *nowy = new Element; // tworzy nowy element listy
+			Element *nowy = new Element; 
 
-			// wype³niamy danymi
 			nowy->wierzcholek = wierzcholek;
 			nowy->waga = waga;
 
-			if (pierwszy == 0) // sprawdzamy czy to pierwszy element listy
+			if (pierwszy == 0) //  czy pierwszy element listy?
 			{
-				// je¿eli tak to nowy element jest teraz pocz¹tkiem listy
+				//  nowy element to pocz¹tkiem listy
 				pierwszy = nowy;
 			}
 
 			else
 			{
-				// w przeciwnym wypadku wêdrujemy na koniec listy
 				Element *pom = pierwszy;
 
 				while (pom->nastepny)
@@ -54,10 +63,9 @@ private:
 					pom = pom->nastepny;
 				}
 
-				pom->nastepny = nowy;  // ostatni element wskazuje na nasz nowy
-				nowy->nastepny = 0;     // ostatni nie wskazuje na nic
+				pom->nastepny = nowy;  
+				nowy->nastepny = 0;     
 			}
-
 		}
 		void UsunPierwszyElement()
 		{
@@ -83,8 +91,6 @@ private:
 			usuwany = pom->nastepny;
 			pom->nastepny = pom->nastepny->nastepny;
 			delete usuwany;
-
-			//jezeli jest to ostatni element, wyzeruj wskaznik ??
 		}
 		void WyswietlListe()
 		{
@@ -131,20 +137,28 @@ private:
 public:
 	int IloscKrawedzi = 0;
 
+	/* Konstruktor listy sasiedztwa */
 	GrafListaSasiedztwa(int MaxIloscWierzcholkow)
 	{
 		this->MaxIloscWierzcholkow = MaxIloscWierzcholkow;
 		Lista = new ListaWierzcholkow[MaxIloscWierzcholkow];
 	}
 
+	/* Destruktor listy sasiedztwa*/
 	~GrafListaSasiedztwa()
 	{
 		delete[] Lista;
 		Lista = NULL;
 	}
 
+	/* Metoda dodajaca krawedz do listy sasiedztwa wraz z jej waga*/
 	void DodajKrawedz(int poczatkowy, int koncowy, int waga);
+
+	/* Metoda wyswietlajaca liste sasiedztwa */
 	void Wyswietl();
+
+	/* Metoda zwracajaca wierzcholki przylegle(sasiadow),
+	   wykorzystujaca metode zawarta w strukturze listy   */
 	void ZwrocPrzylegleWierzcholki(elementKopca przylegle[], int wierzcholek, int IloscWierzcholkow);
 
 };
